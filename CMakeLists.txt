@@ -8,9 +8,7 @@ add_executable(sqlite_vfs_example
         sqlite_demo_vfs.c
         sqlite3.c
         sqlite3.h)
-
-target_link_libraries(sqlite_vfs_example PUBLIC sqlite3)
-
+        
 target_compile_definitions(sqlite_vfs_example
         PUBLIC
         SQLITE_OMIT_AUTOINIT=1
