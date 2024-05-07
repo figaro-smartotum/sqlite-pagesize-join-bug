@@ -1,0 +1,51 @@
+cmake_minimum_required(VERSION 3.28)
+project(sqlite_vfs_example)
+
+set(CMAKE_CXX_STANDARD 17)
+
+add_executable(sqlite_vfs_example
+        main.cpp
+        sqlite_demo_vfs.c
+        sqlite3.c
+        sqlite3.h)
+
+target_link_libraries(sqlite_vfs_example PUBLIC sqlite3)
+
+target_compile_definitions(sqlite_vfs_example
+        PUBLIC
+        SQLITE_OMIT_AUTOINIT=1
+        SQLITE_OS_OTHER=1
+        SQLITE_OMIT_LOAD_EXTENSION=1
+        SQLITE_OMIT_DESERIALIZE=1
+        SQLITE_DQS=3
+        SQLITE_TEMP_STORE=1
+        SQLITE_DISABLE_LFS=1
+        SQLITE_DISABLE_DIRSYNC=1
+        SQLITE_SECURE_DELETE=0
+        SQLITE_DEFAULT_LOOKASIDE=512,16
+        YYSTACKDEPTH=100
+        SQLITE_SMALL_STACK=1
+        SQLITE_SORTER_PMASZ=4
+        SQLITE_DEFAULT_CACHE_SIZE=-1
+        SQLITE_DEFAULT_MEMSTATUS=0
+        SQLITE_DEFAULT_MMAP_SIZE=0
+        SQLITE_CORE=1
+        SQLITE_THREADSAFE=0
+        SQLITE_MUTEX_APPDEF=1
+        SQLITE_OMIT_WAL=1
+        SQLITE_DISABLE_FTS3_UNICODE=1
+        SQLITE_DISABLE_FTS4_DEFERRED=1
+        SQLITE_LIKE_DOESNT_MATCH_BLOBS=1
+        SQLITE_DEFAULT_FOREIGN_KEYS=0
+        SQLITE_DEFAULT_LOCKING_MODE=1
+        SQLITE_MAX_DEFAULT_PAGE_SIZE=512
+        SQLITE_MAX_EXPR_DEPTH=0
+        SQLITE_POWERSAFE_OVERWRITE=1
+
+        # Using DEFAUL_PAGE_SIZE=2048 fixes the issue
+        # SQLITE_DEFAULT_PAGE_SIZE=2048
+
+        SQLITE_DEFAULT_PAGE_SIZE=512
+
+        SQLITE_DEFAULT_PCACHE_INITSZ=4
+)
